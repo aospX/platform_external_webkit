@@ -102,6 +102,7 @@ class MediaQueryMatcher;
 class MouseEventWithHitTestResults;
 class NodeFilter;
 class NodeIterator;
+class NodeRareData;
 class Page;
 class PlatformMouseEvent;
 class ProcessingInstruction;
@@ -1111,11 +1112,13 @@ public:
 
     ContentSecurityPolicy* contentSecurityPolicy() { return m_contentSecurityPolicy.get(); }
 
+    NodeRareData* documentRareData() const { return m_documentRareData; };
+    void setDocumentRareData(NodeRareData* rareData) { m_documentRareData = rareData; }
+
 protected:
     Document(Frame*, const KURL&, bool isXHTML, bool isHTML);
 
     void clearXMLVersion() { m_xmlVersion = String(); }
-
 
 private:
     friend class IgnoreDestructiveWriteCountIncrementer;
@@ -1377,6 +1380,8 @@ private:
     bool m_usingGeolocation;
     
     RefPtr<EventQueue> m_eventQueue;
+
+    NodeRareData* m_documentRareData;
 
 #if ENABLE(WML)
     bool m_containsWMLContent;
