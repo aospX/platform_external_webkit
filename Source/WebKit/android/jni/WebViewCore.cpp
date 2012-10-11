@@ -2802,7 +2802,7 @@ bool WebViewCore::isVisible(Node* node)
     else
         element = node->parentElement();
     // check renderer
-    if (!element->renderer()) {
+    if (!element || !element->renderer()) {
         return false;
     }
     // check size
